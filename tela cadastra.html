@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de cadastrado</title>
+  <style>
+    body {
+      background-color: #0e0e0e;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-form {
+      background-color: #1a1a1a;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-form h2 {
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #333333;
+      color: white;
+    }
+    .status{
+      color: #ffc400;
+      cursor: pointer;
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 15px;
+      background-color: #ffcc00;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .login-form button:hover {
+      background-color: #ffd633;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup h3 {
+      color: #333333;
+      margin-top: 0;
+    }
+
+    .popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ffcc00;
+      color: rgb(31, 29, 29);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Cadastre-se</h2>
+      <input type="text" id="newUsername" placeholder="Novo usuário">
+      <input type="password" id="newPassword" placeholder="Nova senha">
+      <button onclick="cadastrar()">Cadastrar</button>
+      <p id="registerStatus"></p>
+      <a href="C:\Users\TIAGO\Desktop\pagina iot\login.html" class="status" > Realizar login</a>
+    </div>
+  </div>
+
+  <div id="popup" class="popup">
+    <h3>Cadastro realizado com sucesso!</h3>
+    <button onclick="closePopup()">Fechar</button>
+  </div>
+
+  <script>
+    var users = JSON.parse(localStorage.getItem('users')) || []; // Array para armazenar os usuários cadastrados
+
+ 
+    function cadastrar() {
+      var newUsername = document.getElementById('newUsername').value;
+      var newPassword = document.getElementById('newPassword').value;
+
+      // Verifica se o usuário já está cadastrado
+      var userExists = users.some(function(user) {
+        return user.username === newUsername;
+      });
+
+      if (userExists) {
+        document.getElementById('registerStatus').textContent = 'Usuário já cadastrado!';
+      } else {
+        users.push({ username: newUsername, password: newPassword });
+        localStorage.setItem('users', JSON.stringify(users));
+        openPopup();
+        document.getElementById('newUsername').value = '';
+        document.getElementById('newPassword').value = '';
+      }
+    }
+
+    function openPopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = 'block';
+    }
+
+    function closePopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = 'none';
+      window.location.href = window.location.href;
+    }
+  </script>
+</body>
+</html>

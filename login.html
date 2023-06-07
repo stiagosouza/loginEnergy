@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página de Login</title>
+  <style>
+    body {
+      background-color: #0e0e0e;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-form {
+      background-color: #1a1a1a;
+      padding: 40px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .login-form h2 {
+      color: white;
+      margin-bottom: 30px;
+    }
+
+    .login-form input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: none;
+      background-color: #333333;
+      color: white;
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 15px;
+      background-color: #ffcc00;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .login-form button:hover {
+      background-color: #ffd633;
+    }
+    .status{
+      color: #ff7300;
+      cursor: pointer;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #ffffff;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup h3 {
+      color: #333333;
+      margin-top: 0;
+    }
+
+    .popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #ffcc00;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Entre com seu usuário e senha</h2>
+      <input type="text" id="username" placeholder="Usuário">
+      <input type="password" id="password" placeholder="Senha">
+      <button onclick="login()">Entrar</button>
+      <p id="status"></p>
+      <a href="C:\Users\TIAGO\Desktop\pagina iot\tela cadastra.html" class="status" >Cadastre-se</a>
+    </div>
+  </div>
+
+  
+
+  <script>
+    var users = JSON.parse(localStorage.getItem('users')) || []; // Array para armazenar os usuários cadastrados
+
+    function login() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+
+      // Verifica se o usuário e senha são válidos
+      var user = users.find(function(user) {
+        return user.username === username && user.password === password;
+      });
+
+      if (user) {
+        window.location.href = 'https://app.powerbi.com/view?r=eyJrIjoiM2M1MWRiODQtZjVhZi00NDdjLWJhMjgtODhiOWQ4NWIzYWEwIiwidCI6Ijg1MGU0M2NjLTUyMjQtNGFkZS05NWUwLTYyMjJkZGJkZDRhOCJ9 ';
+      } else {
+        document.getElementById('status').textContent = 'Usuário ou senha incorretos!';
+      }
+    }
+
+    
+
+    function openPopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = 'block';
+    }
+
+    function closePopup() {
+      var popup = document.getElementById('popup');
+      popup.style.display = 'none';
+      window.location.href = window.location.href;
+    }
+  </script>
+</body>
+</html>
